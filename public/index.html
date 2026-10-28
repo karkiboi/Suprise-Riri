@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#29162f">
+<title>Riri's Midnight Surprise 🌷</title>
+<style>
+:root{color-scheme:dark;--pink:#ffb7d5;--rose:#f27cab;--cream:#fff4f8;--panel:rgba(255,255,255,.09)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--cream);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at 50% 0%,#70426c 0%,#321b3c 45%,#140f25 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 20% 30%,#fff 40%,transparent 50%),radial-gradient(1px 1px at 70% 18%,#fff 40%,transparent 50%),radial-gradient(2px 2px at 85% 65%,#ffd5e7 40%,transparent 50%),radial-gradient(1px 1px at 35% 75%,#fff 40%,transparent 50%),radial-gradient(1px 1px at 55% 45%,#fff 40%,transparent 50%);opacity:.7}
+main{position:relative;width:min(720px,92vw);margin:0 auto;padding:42px 0 70px;text-align:center}.moon{font-size:2.4rem;filter:drop-shadow(0 0 18px #ffd5e7)}.eyebrow{letter-spacing:.22em;text-transform:uppercase;font: .72rem Arial,sans-serif;color:#ffd1e4}.card{margin:24px 0;padding:clamp(22px,5vw,42px);border:1px solid #ffffff26;border-radius:28px;background:var(--panel);box-shadow:0 20px 70px #09061355;backdrop-filter:blur(10px)}h1{font-size:clamp(2.3rem,8vw,4.4rem);font-weight:normal;line-height:1.04;margin:16px 0;color:#ffd4e6}h2{font-weight:normal;color:#ffd4e6;font-size:clamp(1.6rem,5vw,2.3rem)}p{font-size:1.12rem;line-height:1.75}.muted{color:#e6c9df}.tulips{font-size:2.2rem;letter-spacing:.18em;margin:18px 0}.count{font:600 1rem Arial,sans-serif;color:#fff;background:#ffffff12;border-radius:14px;padding:14px;margin-top:20px}.button{display:inline-block;border:0;border-radius:999px;padding:13px 22px;margin:8px;background:linear-gradient(120deg,#ffb6d5,#e978ad);color:#31182e;font-weight:bold;font-size:1rem;cursor:pointer}.button.secondary{background:#ffffff15;color:#fff;border:1px solid #ffffff3b}.hidden{display:none!important}.note-number{font: .75rem Arial,sans-serif;letter-spacing:.2em;color:#ffbed9;text-transform:uppercase}.note{min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center}.note-text{font-size:clamp(1.3rem,4vw,1.8rem);line-height:1.5}.progress{height:5px;background:#ffffff1c;border-radius:8px;overflow:hidden;margin:20px 0}.progress span{display:block;height:100%;width:0;background:#ffb6d5;transition:width .3s}.choices{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}.small{font: .82rem Arial,sans-serif;color:#d8bfd7}.status{min-height:28px;font: .9rem Arial,sans-serif;color:#ffd1e4}
+</style>
+</head>
+<body><main>
+  <div class="moon">☾</div>
+  <div class="eyebrow">a little corner of the universe</div>
+  <h1>For Riri 🌷</h1>
+  <p class="muted">A garden of little thoughts, saved for your birthday.</p>
+  <div class="tulips">🌷 ✦ 🌷 ✦ 🌷</div>
+  <section id="waiting" class="card">
+    <div class="eyebrow">the garden is waiting</div>
+    <h2>Something lovely is on its way</h2>
+    <p>Come back when the clock reaches midnight on <strong>December 17, 2026</strong>, Nepal time.</p>
+    <div id="countdown" class="count">Counting down to midnight…</div>
+    <p class="small">The notes unlock one at a time, every hour, through noon.</p>
+  </section>
+  <section id="experience" class="card hidden">
+    <div class="eyebrow">happy birthday</div>
+    <h2>Happy Birthday, Riri! 💗</h2>
+    <p>Today deserves a little extra magic. I made you this tiny garden, with twelve thoughts waiting to bloom throughout your morning.</p>
+    <div class="tulips">🌷🌷🌷</div>
+    <div id="noteBox" class="note">
+      <div id="noteNumber" class="note-number">note 1 of 12</div>
+      <p id="noteText" class="note-text"></p>
+      <div id="noteUnlock" class="small"></div>
+    </div>
+    <div class="progress"><span id="progress"></span></div>
+    <button id="nextNote" class="button">Open today's first note ✨</button>
+    <p id="noteStatus" class="status"></p>
+  </section>
+  <section id="proposal" class="card hidden">
+    <div class="eyebrow">one last thing</div>
+    <h2>Can I ask you something, Riri? 💌</h2>
+    <p>You've made this little corner of my world brighter. There's something I've wanted to ask, and I wanted to do it in a way that feels special.</p>
+    <p class="note-text">Would you like to be my girlfriend? 🌷</p>
+    <p class="small">Please choose whatever feels right for you. There's no pressure to say yes.</p>
+    <div class="choices">
+      <button class="button" data-answer="yes">Yes 💗</button>
+      <button class="button secondary" data-answer="not-sure">I need time 🌙</button>
+      <button class="button secondary" data-answer="no">No, thank you 🤍</button>
+    </div>
+    <p id="answerStatus" class="status"></p>
+  </section>
+  <p class="small">Made with care, a little stardust, and tulips. 🌷</p>
+</main>
+<script>
+const notes = [
+  "I hope today gives you a hundred little reasons to smile.",
+  "Official birthday reminder: you deserve the biggest slice of cake. 🎂",
+  "May this new year bring you calm mornings and exciting surprises.",
+  "Some people make ordinary days feel brighter. You're one of them.",
+  "I hope you laugh so much today that your cheeks start hurting. ✨",
+  "A tiny reminder that your effort and kindness matter more than you know.",
+  "May your next chapter be full of good people and brave new beginnings.",
+  "If birthdays came with wishes that always worked, I'd wish you extra happiness.",
+  "You deserve moments that feel like sunshine after rain.",
+  "I hope you keep finding little things that make you excited about life.",
+  "One more year of becoming even more wonderfully you. 🌷",
+  "Thank you for being you. I hope this birthday feels as special as you are."
+];
+const token = location.pathname.split("/").filter(Boolean).pop();
+const unlockTime = new Date("2026-12-17T00:00:00+05:45");
+const waiting = document.getElementById("waiting");
+const experience = document.getElementById("experience");
+const proposal = document.getElementById("proposal");
+let opened = 0;
+function nptNow(){ return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Kathmandu"})); }
+function refresh(){
+  const now = new Date();
+  if(now < unlockTime){
+    const ms = unlockTime - now;
+    const days=Math.floor(ms/86400000), hrs=Math.floor(ms%86400000/3600000), mins=Math.floor(ms%3600000/60000), secs=Math.floor(ms%60000/1000);
+    document.getElementById("countdown").textContent=`${days} days · ${hrs} hours · ${mins} minutes · ${secs} seconds`;
+    waiting.classList.remove("hidden"); experience.classList.add("hidden"); proposal.classList.add("hidden");
+  } else {
+    waiting.classList.add("hidden"); experience.classList.remove("hidden");
+    const elapsed = now - unlockTime;
+    const available = Math.min(12, Math.floor(elapsed / 3600000) + 1);
+    if(opened===0) showNote(1, available);
+    else showNote(opened, available);
+  }
+}
+function showNote(index, available){
+  opened=Math.min(index, available);
+  document.getElementById("noteNumber").textContent=`note ${opened} of 12`;
+  document.getElementById("noteText").textContent=notes[opened-1];
+  document.getElementById("progress").style.width=`${opened/12*100}%`;
+  const unlockAt = new Date(unlockTime.getTime()+(opened-1)*3600000);
+  document.getElementById("noteUnlock").textContent = `Unlocked ${opened===1?"at midnight":`at ${String((opened-1)%12).padStart(2,"0")}:00 NPT`}`;
+  const btn=document.getElementById("nextNote");
+  if(opened < available){btn.textContent="Read next note ✨";btn.disabled=false;}
+  else if(opened < 12){btn.textContent="Next note unlocks at the next hour";btn.disabled=true;}
+  else {btn.textContent="Continue to one last thing 💌";btn.disabled=false;}
+  btn.onclick=()=>{
+    if(opened < available) showNote(opened+1, available);
+    else if(opened===12) {proposal.classList.remove("hidden");proposal.scrollIntoView({behavior:"smooth"});}
+    else document.getElementById("noteStatus").textContent="The next note unlocks at the next hour in Nepal time. 🌙";
+  };
+  if(opened===12 && available===12) btn.textContent="Continue to one last thing 💌";
+}
+document.querySelectorAll("[data-answer]").forEach(btn=>btn.addEventListener("click",async()=>{
+  const status=document.getElementById("answerStatus");
+  if(!confirm("Are you sure you want to submit this answer?")) return;
+  document.querySelectorAll("[data-answer]").forEach(b=>b.disabled=true);
+  status.textContent="Saving your answer…";
+  try{
+    const response=await fetch(`/api/answer/${encodeURIComponent(token)}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({answer:btn.dataset.answer})});
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.error||"Could not save the answer.");
+    status.textContent=data.emailSent ? "Your answer has been saved. 💗" : "Your answer has been saved. 💗";
+    document.querySelector(".choices").classList.add("hidden");
+  }catch(e){status.textContent=e.message||"Something went wrong. Please try again.";}
+}));
+refresh();setInterval(refresh,1000);
+</script>
+</body></html>
